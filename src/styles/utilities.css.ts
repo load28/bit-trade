@@ -1,6 +1,6 @@
 import { style } from "@vanilla-extract/css";
 import { utilitiesLayer } from "./layers.css";
-import { themeVars } from "./theme.css";
+import { tokens } from "./tokens.css";
 
 /**
  * Utility styles in the utilities layer
@@ -50,7 +50,7 @@ export const flexBetween = style({
 export const gap1 = style({
   "@layer": {
     [utilitiesLayer]: {
-      gap: themeVars.spacing.xs,
+      gap: tokens.spacing["1"],
     },
   },
 });
@@ -58,7 +58,15 @@ export const gap1 = style({
 export const gap2 = style({
   "@layer": {
     [utilitiesLayer]: {
-      gap: themeVars.spacing.sm,
+      gap: tokens.spacing["2"],
+    },
+  },
+});
+
+export const gap3 = style({
+  "@layer": {
+    [utilitiesLayer]: {
+      gap: tokens.spacing["3"],
     },
   },
 });
@@ -66,7 +74,7 @@ export const gap2 = style({
 export const gap4 = style({
   "@layer": {
     [utilitiesLayer]: {
-      gap: themeVars.spacing.md,
+      gap: tokens.spacing["4"],
     },
   },
 });
@@ -74,7 +82,15 @@ export const gap4 = style({
 export const gap6 = style({
   "@layer": {
     [utilitiesLayer]: {
-      gap: themeVars.spacing.lg,
+      gap: tokens.spacing["6"],
+    },
+  },
+});
+
+export const gap8 = style({
+  "@layer": {
+    [utilitiesLayer]: {
+      gap: tokens.spacing["8"],
     },
   },
 });
@@ -96,10 +112,59 @@ export const textLeft = style({
   },
 });
 
+export const textRight = style({
+  "@layer": {
+    [utilitiesLayer]: {
+      textAlign: "right",
+    },
+  },
+});
+
 export const textMuted = style({
   "@layer": {
     [utilitiesLayer]: {
-      color: themeVars.color.mutedForeground,
+      color: tokens.colors.mutedForeground,
+    },
+  },
+});
+
+export const textProfit = style({
+  "@layer": {
+    [utilitiesLayer]: {
+      color: tokens.colors.profit,
+    },
+  },
+});
+
+export const textLoss = style({
+  "@layer": {
+    [utilitiesLayer]: {
+      color: tokens.colors.loss,
+    },
+  },
+});
+
+// Font utilities
+export const fontMono = style({
+  "@layer": {
+    [utilitiesLayer]: {
+      fontFamily: tokens.typography.fontFamily.mono,
+    },
+  },
+});
+
+export const fontBold = style({
+  "@layer": {
+    [utilitiesLayer]: {
+      fontWeight: tokens.typography.fontWeight.bold,
+    },
+  },
+});
+
+export const fontMedium = style({
+  "@layer": {
+    [utilitiesLayer]: {
+      fontWeight: tokens.typography.fontWeight.medium,
     },
   },
 });
@@ -136,7 +201,7 @@ export const container = style({
       width: "100%",
       maxWidth: "1200px",
       marginInline: "auto",
-      paddingInline: themeVars.spacing.md,
+      paddingInline: tokens.spacing["4"],
     },
   },
 });

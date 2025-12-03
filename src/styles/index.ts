@@ -6,5 +6,5 @@ export * from "./layers.css";
 
 // 2. Then import styles that use those layers
 export * from "./reset.css";
-export * from "./theme.css";
+export * from "./tokens.css";
 export * from "./utilities.css";
