@@ -1,0 +1,16 @@
+/**
+ * Global CSS - Layer Registration
+ *
+ * This file only declares the layer order.
+ * All actual styles are handled by vanilla-extract.
+ *
+ * Layer priority (lowest to highest):
+ * 1. reset - CSS reset styles
+ * 2. base - Theme variables and global styles
+ * 3. utilities - Utility classes
+ * 4. components - Component-specific styles
+ */
+@layer reset, base, utilities, components;
+
+/* Tailwind CSS integration (optional) */
+@import "tailwindcss";
