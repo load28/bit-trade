@@ -11,6 +11,3 @@
  * 4. components - Component-specific styles
  */
 @layer reset, base, utilities, components;
-
-/* Tailwind CSS integration (optional) */
-@import "tailwindcss";
