@@ -8,22 +8,32 @@
  * - Web Worker 렌더링 오프로드
  * - SharedArrayBuffer 제로카피 데이터 전송
  * - 하이브리드 렌더링 (WebGL + Canvas 2D)
+ * - React 통합 (컴포넌트 및 훅)
+ * - 실시간 데이터 스트리밍
  *
  * @example
  * ```typescript
+ * // React 컴포넌트 사용
+ * import { Chart, useChartData, useRealtimeData } from '@/chart/react';
+ *
+ * function TradingChart() {
+ *   const { data, appendData, updateLastCandle } = useChartData();
+ *   const { connect, subscribe, currentCandle } = useRealtimeData({
+ *     url: 'wss://stream.binance.com/ws',
+ *   });
+ *
+ *   return <Chart data={data} options={{ theme: 'dark' }} />;
+ * }
+ * ```
+ *
+ * @example
+ * ```typescript
+ * // Vanilla JavaScript 사용
  * import { ChartController } from '@/chart';
  *
- * // 간단한 사용법
  * const chart = new ChartController({ theme: 'dark' });
  * await chart.init('chart-container');
  * chart.setData(ohlcvData);
- *
- * // 이벤트 처리
- * chart.addEventListener((event) => {
- *   if (event.type === 'crosshair') {
- *     console.log('Crosshair:', event.data);
- *   }
- * });
  *
  * // 지표 계산
  * const sma = await chart.computeIndicator('SMA', { period: 20 });
@@ -31,7 +41,7 @@
  *
  * @example
  * ```typescript
- * // 저수준 API 사용 (직접 WebGL 제어)
+ * // 저수준 API (직접 WebGL 제어)
  * import { WebGLRenderer, CandlestickSeries, VolumeSeries } from '@/chart';
  *
  * const renderer = new WebGLRenderer(canvas);
@@ -44,7 +54,6 @@
  * candlesticks.setData(ohlcvData);
  * volume.setData(ohlcvData);
  *
- * // Render loop
  * function render() {
  *   renderer.beginFrame();
  *   candlesticks.render(viewport);
@@ -75,3 +84,12 @@ export * from './utils';
 
 // UI
 export * from './ui';
+
+// Optimization
+export * from './optimization';
+
+// Realtime
+export * from './realtime';
+
+// React (Components & Hooks)
+export * from './react';
