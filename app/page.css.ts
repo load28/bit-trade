@@ -1,6 +1,6 @@
 import { style } from "@vanilla-extract/css";
 import { componentsLayer } from "@/styles/layers.css";
-import { themeVars } from "@/styles/theme.css";
+import { tokens } from "@/styles/tokens.css";
 
 /**
  * Page styles in the components layer (highest priority)
@@ -14,8 +14,8 @@ export const pageContainer = style({
       minHeight: "100vh",
       alignItems: "center",
       justifyContent: "center",
-      background: themeVars.color.muted,
-      fontFamily: themeVars.font.sans,
+      background: tokens.colors.muted,
+      fontFamily: tokens.typography.fontFamily.sans,
     },
   },
 });
@@ -31,7 +31,7 @@ export const main = style({
       alignItems: "center",
       justifyContent: "space-between",
       padding: "8rem 4rem",
-      background: themeVars.color.background,
+      background: tokens.colors.background,
       "@media": {
         "(min-width: 640px)": {
           alignItems: "flex-start",
@@ -60,7 +60,7 @@ export const contentSection = style({
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
-      gap: themeVars.spacing.lg,
+      gap: tokens.spacing["6"],
       textAlign: "center",
       "@media": {
         "(min-width: 640px)": {
@@ -80,7 +80,7 @@ export const title = style({
       fontWeight: 600,
       lineHeight: 1.25,
       letterSpacing: "-0.025em",
-      color: themeVars.color.foreground,
+      color: tokens.colors.foreground,
     },
   },
 });
@@ -91,7 +91,7 @@ export const description = style({
       maxWidth: "28rem",
       fontSize: "1.125rem",
       lineHeight: 2,
-      color: themeVars.color.mutedForeground,
+      color: tokens.colors.mutedForeground,
     },
   },
 });
@@ -100,7 +100,7 @@ export const link = style({
   "@layer": {
     [componentsLayer]: {
       fontWeight: 500,
-      color: themeVars.color.foreground,
+      color: tokens.colors.foreground,
     },
   },
 });
@@ -110,7 +110,7 @@ export const buttonGroup = style({
     [componentsLayer]: {
       display: "flex",
       flexDirection: "column",
-      gap: themeVars.spacing.md,
+      gap: tokens.spacing["4"],
       fontSize: "1rem",
       fontWeight: 500,
       "@media": {
@@ -130,14 +130,14 @@ export const primaryButton = style({
       width: "100%",
       alignItems: "center",
       justifyContent: "center",
-      gap: themeVars.spacing.sm,
-      borderRadius: themeVars.radius.full,
-      background: themeVars.color.foreground,
+      gap: tokens.spacing["2"],
+      borderRadius: tokens.radius.full,
+      background: tokens.colors.foreground,
       paddingInline: "1.25rem",
-      color: themeVars.color.background,
+      color: tokens.colors.background,
       transition: "background-color 0.2s",
       ":hover": {
-        background: themeVars.color.mutedForeground,
+        background: tokens.colors.mutedForeground,
       },
       "@media": {
         "(min-width: 768px)": {
@@ -156,13 +156,13 @@ export const secondaryButton = style({
       width: "100%",
       alignItems: "center",
       justifyContent: "center",
-      borderRadius: themeVars.radius.full,
-      border: `1px solid ${themeVars.color.border}`,
+      borderRadius: tokens.radius.full,
+      border: `1px solid ${tokens.colors.border}`,
       paddingInline: "1.25rem",
       transition: "background-color 0.2s, border-color 0.2s",
       ":hover": {
         borderColor: "transparent",
-        background: themeVars.color.muted,
+        background: tokens.colors.muted,
       },
       "@media": {
         "(min-width: 768px)": {

@@ -1,6 +1,6 @@
 import { style } from "@vanilla-extract/css";
 import { componentsLayer } from "@/styles/layers.css";
-import { themeVars } from "@/styles/theme.css";
+import { tokens } from "@/styles/tokens.css";
 
 export const themeToggleButton = style({
   "@layer": {
@@ -13,13 +13,13 @@ export const themeToggleButton = style({
       justifyContent: "center",
       width: "2.5rem",
       height: "2.5rem",
-      borderRadius: themeVars.radius.lg,
-      border: `1px solid ${themeVars.color.border}`,
-      background: themeVars.color.background,
+      borderRadius: tokens.radius.lg,
+      border: `1px solid ${tokens.colors.border}`,
+      background: tokens.colors.background,
       cursor: "pointer",
-      transition: "background-color 0.2s, border-color 0.2s",
+      transition: `background-color ${tokens.transition.duration.normal} ${tokens.transition.easing.easeInOut}, border-color ${tokens.transition.duration.normal} ${tokens.transition.easing.easeInOut}`,
       ":hover": {
-        background: themeVars.color.muted,
+        background: tokens.colors.muted,
       },
     },
   },
@@ -30,8 +30,8 @@ export const iconSun = style({
     [componentsLayer]: {
       width: "1.25rem",
       height: "1.25rem",
-      color: themeVars.color.foreground,
-      transition: "transform 0.3s, opacity 0.3s",
+      color: tokens.colors.foreground,
+      transition: `transform ${tokens.transition.duration.slow} ${tokens.transition.easing.easeInOut}, opacity ${tokens.transition.duration.slow} ${tokens.transition.easing.easeInOut}`,
       selectors: {
         '[data-theme="dark"] &': {
           transform: "rotate(90deg) scale(0)",
@@ -48,8 +48,8 @@ export const iconMoon = style({
       position: "absolute",
       width: "1.25rem",
       height: "1.25rem",
-      color: themeVars.color.foreground,
-      transition: "transform 0.3s, opacity 0.3s",
+      color: tokens.colors.foreground,
+      transition: `transform ${tokens.transition.duration.slow} ${tokens.transition.easing.easeInOut}, opacity ${tokens.transition.duration.slow} ${tokens.transition.easing.easeInOut}`,
       transform: "rotate(-90deg) scale(0)",
       opacity: 0,
       selectors: {
