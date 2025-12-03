@@ -27,7 +27,9 @@
       "@/components/*": ["./src/components/*"],
       "@/components": ["./src/components/index.ts"],
       "@/providers/*": ["./src/providers/*"],
-      "@/providers": ["./src/providers/index.ts"]
+      "@/providers": ["./src/providers/index.ts"],
+      "@/auth/*": ["./src/auth/*"],
+      "@/auth": ["./src/auth/index.ts"]
     }
   },
   "include": [
