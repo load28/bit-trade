@@ -29,7 +29,8 @@
       "@/providers/*": ["./src/providers/*"],
       "@/providers": ["./src/providers/index.ts"],
       "@/auth/*": ["./src/auth/*"],
-      "@/auth": ["./src/auth/index.ts"]
+      "@/auth": ["./src/auth/index.ts"],
+      "@/lib/*": ["./src/lib/*"]
     }
   },
   "include": [

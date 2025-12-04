@@ -7,6 +7,7 @@ import type { NextAuthConfig } from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
 import { ROLES, type Role, type User as AppUser } from './types';
 import { defineAbilityFor, packAbilityRules } from './ability';
+import { signInWithSupabase } from '@/lib/supabase';
 
 // ============================================================================
 // 타입 확장 (Auth.js 타입 확장)
@@ -67,70 +68,41 @@ export const authConfig: NextAuthConfig = {
         password: { label: 'Password', type: 'password' },
       },
       async authorize(credentials) {
-        // TODO: 실제 인증 로직으로 교체
-        // 현재는 개발용 더미 인증
         if (!credentials?.email || !credentials?.password) {
           return null;
         }
 
-        const email = credentials.email as string;
-        const password = credentials.password as string;
+        try {
+          // Supabase 로그인
+          const { user, session } = await signInWithSupabase(
+            credentials.email as string,
+            credentials.password as string
+          );
 
-        // 개발용 테스트 계정
-        const testUsers: Record<
-          string,
-          { password: string; role: Role; name: string }
-        > = {
-          'admin@bittrade.com': {
-            password: 'admin123',
-            role: ROLES.SUPER_ADMIN,
-            name: '슈퍼 관리자',
-          },
-          'company@bittrade.com': {
-            password: 'company123',
-            role: ROLES.COMPANY_ADMIN,
-            name: '회사 관리자',
-          },
-          'risk@bittrade.com': {
-            password: 'risk123',
-            role: ROLES.RISK_MANAGER,
-            name: '리스크 관리자',
-          },
-          'trader@bittrade.com': {
-            password: 'trader123',
-            role: ROLES.TRADER,
-            name: '트레이더',
-          },
-          'analyst@bittrade.com': {
-            password: 'analyst123',
-            role: ROLES.ANALYST,
-            name: '애널리스트',
-          },
-          'viewer@bittrade.com': {
-            password: 'viewer123',
-            role: ROLES.VIEWER,
-            name: '뷰어',
-          },
-          'auditor@bittrade.com': {
-            password: 'auditor123',
-            role: ROLES.AUDITOR,
-            name: '감사자',
-          },
-        };
+          if (!user || !session) {
+            return null;
+          }
 
-        const testUser = testUsers[email];
-        if (!testUser || testUser.password !== password) {
+          // 사용자 메타데이터에서 역할 정보 추출
+          const metadata = user.user_metadata || {};
+          const role = metadata.role || ROLES.VIEWER;
+          const companyId = metadata.companyId || undefined;
+          const status = metadata.status || 'active';
+
+          // NextAuth User 형식으로 변환
+          return {
+            id: user.id,
+            email: user.email!,
+            name: metadata.name || user.email?.split('@')[0] || null,
+            image: metadata.avatar_url || null,
+            role: role as Role,
+            companyId,
+            status: status as 'active' | 'inactive' | 'suspended' | 'pending',
+          };
+        } catch (error) {
+          console.error('Supabase 인증 오류:', error);
           return null;
         }
-
-        return {
-          id: `user-${email.split('@')[0]}`,
-          email,
-          name: testUser.name,
-          role: testUser.role,
-          companyId: 'company-1',
-          status: 'active' as const,
-        };
       },
     }),
   ],

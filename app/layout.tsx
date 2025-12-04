@@ -5,17 +5,20 @@ import "@/styles/index";
 import { ThemeProvider, ThemeScript } from "@/theme";
 import { QueryProvider } from "@/providers";
 import { AuthProvider } from "@/auth";
+import { auth } from "@/auth/auth";
 
 export const metadata: Metadata = {
   title: "Bit Trade",
   description: "Bit Trade Application",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const session = await auth();
+
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
@@ -27,7 +30,7 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <AuthProvider>
+        <AuthProvider session={session}>
           <QueryProvider>
             <ThemeProvider
               attribute="data-theme"

@@ -52,7 +52,9 @@ export function defineAbilityFor(user: User | null): AppAbility {
 
   if (!user) {
     // 미인증 사용자: 권한 없음
-    return build();
+    return build({
+      conditionsMatcher: (matchConditions) => matchConditions,
+    });
   }
 
   // 사용자 권한 계산
@@ -96,7 +98,9 @@ export function defineAbilityFor(user: User | null): AppAbility {
     }
   }
 
-  return build();
+  return build({
+    conditionsMatcher: (matchConditions) => matchConditions,
+  });
 }
 
 /**
@@ -173,7 +177,9 @@ export function createGuestAbility(): AppAbility {
   can(ACTIONS.READ, SUBJECTS.MARKET_DATA);
   can(ACTIONS.READ, SUBJECTS.CHART);
 
-  return build();
+  return build({
+    conditionsMatcher: (matchConditions) => matchConditions,
+  });
 }
 
 /**
