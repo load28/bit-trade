@@ -1,5 +1,5 @@
 /**
- * Next.js 미들웨어
+ * Next.js 프록시
  * 라우트 보호 및 인증 검증
  */
 
@@ -9,9 +9,9 @@ import { PUBLIC_ROUTES, canAccessRoute } from '@/auth/config';
 import type { Role } from '@/auth/types';
 
 /**
- * 미들웨어 함수
+ * 프록시 함수
  */
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // 공개 라우트는 통과
@@ -55,7 +55,7 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   /**
-   * 미들웨어가 적용될 경로
+   * 프록시가 적용될 경로
    */
   matcher: [
     /*
